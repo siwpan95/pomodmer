@@ -7,7 +7,11 @@
     "start": "node src/demo.mjs",
     "demo": "node src/demo.mjs",
     "gen": "node src/cli.mjs",
-    "smoke": "node src/_smoke.mjs"
+    "smoke": "node src/_smoke.mjs",
+    "map:demo": "node src/map_demo.mjs",
+    "map:gen": "node src/map_gen.mjs",
+    "map:cli": "node src/map_cli.mjs",
+    "test": "node src/_smoke.mjs && node src/map_demo.mjs && node src/map_gen.mjs"
   },
   "keywords": [],
   "author": "siwpan",
