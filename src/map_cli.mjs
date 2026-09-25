@@ -22,6 +22,8 @@ const { positionals, values } = parseArgs({
     xlsx: { type: 'string' },
     png: { type: 'string' },
     out: { type: 'string' },
+    json: { type: 'string' },
+    name: { type: 'string' },
     px: { type: 'string', default: '100' },
     grid: { type: 'boolean', default: false },
   },
@@ -58,9 +60,29 @@ async function main() {
     const out = resolve(values.out || 'output/map.png')
     const ren = await m.renderMapPng(xlsx, values.sheet, out, num(values.px, 100), values.grid)
     console.log('[map-cli] render', JSON.stringify(ren))
+  } else if (cmd === 'export') {
+    const out = resolve(values.out || 'output/map.donjon.json')
+    const exp = await m.exportDonjon(xlsx, out, {
+      sheet: values.sheet,
+      name: values.name,
+      px: num(values.px, 100),
+      seed: values.seed ? parseInt(values.seed, 10) : 0,
+      level: num(values.level, 3),
+    })
+    console.log('[map-cli] export', JSON.stringify(exp))
+  } else if (cmd === 'import') {
+    const jsonPath = resolve(values.json || 'output/map.donjon.json')
+    const imp = await m.importDonjon(xlsx, jsonPath, { sheet: values.sheet })
+    await m.save(xlsx)
+    console.log('[map-cli] import', JSON.stringify(imp))
+    if (values.png) {
+      const p = resolve(values.png)
+      const ren = await m.renderMapPng(xlsx, values.sheet, p, num(values.px, 100), values.grid)
+      console.log('[map-cli] import+render', JSON.stringify(ren))
+    }
   } else {
     console.error(
-      '用法: node src/map_cli.mjs gen|render [--xlsx ... --cols .. --rows .. --rooms .. --level .. --seed .. --png .. --out .. --px .. --grid]'
+      '用法: node src/map_cli.mjs gen|render|export|import [--xlsx ... --json ... --out ... --cols .. --rows .. --rooms .. --level .. --seed .. --name .. --png .. --sheet .. --px .. --grid]'
     )
     process.exit(2)
   }

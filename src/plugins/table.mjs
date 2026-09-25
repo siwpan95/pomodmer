@@ -178,6 +178,15 @@ export class TableService extends Service {
   genDungeon(path, opts = {}) {
     return this.bridge.call('gen_dungeon', { path, ...opts })
   }
+  // ---- DonJon 风格 JSON 互通 ----
+  // 导出：把 Map 表 + 数据表 -> DonJon 风格 JSON 文件（out）
+  exportDonjon(path, out, opts = {}) {
+    return this.bridge.call('export_donjon', { path, out, ...opts })
+  }
+  // 导入：把 DonJon 风格 JSON 文件（json）-> 新 Map 表 + 数据表
+  importDonjon(path, jsonPath, opts = {}) {
+    return this.bridge.call('import_donjon', { path, json: jsonPath, ...opts })
+  }
 }
 
 export default TableService

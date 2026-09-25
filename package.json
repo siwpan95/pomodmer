@@ -11,7 +11,10 @@
     "map:demo": "node src/map_demo.mjs",
     "map:gen": "node src/map_gen.mjs",
     "map:cli": "node src/map_cli.mjs",
-    "test": "node src/_smoke.mjs && node src/map_demo.mjs && node src/map_gen.mjs"
+    "map:dj": "node src/map_dj.mjs",
+    "map:export": "node src/map_cli.mjs export",
+    "map:import": "node src/map_cli.mjs import",
+    "test": "node src/_smoke.mjs && node src/map_demo.mjs && node src/map_gen.mjs && node src/map_dj.mjs"
   },
   "keywords": [],
   "author": "siwpan",
