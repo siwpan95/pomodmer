@@ -149,6 +149,35 @@ export class TableService extends Service {
   close(path) {
     return this.bridge.call('close', { path })
   }
+
+  // ---- 地图相关方法（与 python/rpc_server.py 的 method 对应，共用同一 worker）----
+  setCellFill(path, sheet, row, col, color) {
+    return this.bridge.call('set_cell_fill', { path, sheet, row, col, color })
+  }
+  mergeCells(path, sheet, r1, c1, r2, c2) {
+    return this.bridge.call('merge_cells', { path, sheet, r1, c1, r2, c2 })
+  }
+  setCellText(path, sheet, row, col, text) {
+    return this.bridge.call('set_cell_text', { path, sheet, row, col, text })
+  }
+  setComment(path, sheet, row, col, text) {
+    return this.bridge.call('set_comment', { path, sheet, row, col, text })
+  }
+  setBorders(path, sheet, r1, c1, r2, c2, opts = {}) {
+    return this.bridge.call('set_borders', { path, sheet, r1, c1, r2, c2, ...opts })
+  }
+  readMap(path, sheet) {
+    return this.bridge.call('read_map', { path, sheet })
+  }
+  renderMapPng(path, sheet, out, px = 100, grid = false) {
+    return this.bridge.call('render_map_png', { path, sheet, out, px, grid })
+  }
+  renderToken(text, out, size = 400, color = 'FF4F81BD') {
+    return this.bridge.call('render_token', { text, out, size, color })
+  }
+  genDungeon(path, opts = {}) {
+    return this.bridge.call('gen_dungeon', { path, ...opts })
+  }
 }
 
 export default TableService
