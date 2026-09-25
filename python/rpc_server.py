@@ -24,6 +24,22 @@ from openpyxl.utils import get_column_letter
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 
 
+def _setup_stdio_utf8():
+    """三条标准流统一为 UTF-8。
+
+    中文 Windows 控制台的 Python 默认 stdio 编码是 GBK(cp936)：本进程用
+    ensure_ascii=False 写一行一 JSON-RPC（见 main），非 ASCII 字符会被编成
+    GBK 字节，而 Node 侧 readline 按 UTF-8 解码，得到孤立代理项（如 \\udc8c），
+    于是 openpyxl/lxml 落盘时报 `UnicodeEncodeError: surrogates not allowed`。
+    显式 reconfigure 后协议两端都是 UTF-8，跨机器（含 Windows）行为一致。
+    """
+    for stream in (sys.stdin, sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass  # 流被重定向成不支持 reconfigure 的对象时保持原样
+
+
 WORKBOOKS = {}  # path -> Workbook
 
 
@@ -164,4 +180,5 @@ def main():
 
 
 if __name__ == "__main__":
+    _setup_stdio_utf8()
     main()
