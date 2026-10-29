@@ -1,3 +1,8 @@
+> 📦 **已归档（Archived — 仅作参考）**
+> 本仓库已收入归档仓 **dev-toolkit**（代码与完整 git 历史一并迁入，原仓冻结不再开发）。
+> 历史分支见归档仓的 `archive/pomodmer` 分支；活跃维护请前往 **dev-toolkit**。
+> _This repo is archived into dev-toolkit; development continues there. Do not commit here._
+
 # Pomodmer —— Cordis 内核 + 本地 Web UI 的番茄钟
 
 仓库：<https://gitee.com/siwpan/pomodmer>（公开，MIT）
