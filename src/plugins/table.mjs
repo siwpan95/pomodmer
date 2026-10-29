@@ -94,7 +94,7 @@ function commonCandidates() {
     }
     out.push(resolve(root, 'python.exe'))
   }
-  // ③ 遍历所有就绪盘符的根目录（覆盖装在非系统盘的情况，如 F:\Python314）
+  // ③ 遍历所有就绪盘符的根目录（覆盖装在非系统盘的情况，如 /Python314）
   for (const drive of driveLetters()) {
     for (const v of ['314', '313', '312', '311', '310']) {
       out.push(drive + ':/Python' + v + '/python.exe')

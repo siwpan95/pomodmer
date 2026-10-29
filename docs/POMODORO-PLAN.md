@@ -38,7 +38,7 @@ src/core/bridge.mjs  src/demo.mjs  src/plugins/table.mjs
 | Node | `v22.22.2` | 可用 `node:http`、`node:sqlite`、原生 ESM |
 | npm 依赖 | 仅 `cordis` / `@cordisjs/plugin-loader` / `@cordisjs/plugin-logger-console` | **无 express / ws / 前端框架**，新增 UI 必须零第三方依赖 |
 | `node:sqlite` | 可用（`DatabaseSync, StatementSync`），带 ExperimentalWarning | 零依赖持久化**可选方案**（实验性 API，升级风险） |
-| Python | `E:\Python314\python.exe` = 3.13.14，`openpyxl 3.1.5` 已装 | 现有 OpenPyXL 桥可留作 P2 周报导出 |
+| Python | `/Python314/python.exe` = 3.13.14，`openpyxl 3.1.5` 已装 | 现有 OpenPyXL 桥可留作 P2 周报导出 |
 | 插件机制 | `cordis.json` entries → Loader 声明式加载，`Service` 子类 `provide('table')` | 番茄钟各能力应拆成**独立 Cordis 服务插件**，沿用同一套模式 |
 | 宿主启动 | `src/boot.mjs` 的 `bootHost/stopHost` 被入口/CLI/测试三方共用 | 新能力直接挂 entries，避免启动路径漂移 |
 | 现有 CLI | `src/cli.mjs` = JSON→xlsx 生成器 | 可改造或并列新增 `pomodoro` 子命令 |
